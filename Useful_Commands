@@ -1,0 +1,130 @@
+# Useful R commands
+
+# Percentage change whether x is percentage points or units
+(Xnew - Xold) / Xold * 100
+Xnew = 
+Xold = 
+
+# Sample varience, (define x and xbar)
+(sum((x - xbar)^2)) / (length(x) - 1)
+#or
+var(x)
+
+# Sample standard deviation
+sqrt(var(x))
+sd(x)
+
+# Sample covarience
+sum((x - mean(x)) * (y - mean(y))) / (length(x) - 1)
+#or
+cov(x,y)
+
+# Sample correlation
+cov(x,y) / (sd(x) * sd(y))
+#or
+cor(x,y)
+
+# Finding n
+length(x)
+
+# Joining character vector together
+paste(vector1, collapse = " ")
+
+# Join two vectors (recycling happens if different lengths)
+paste(vector1, vector2, sep = "")
+
+#Expected values (x = values, p = probabilities of values)
+sum(x * p)
+x = c()     
+p = rep(1/6, 6) 
+
+# Weights expected value of SQUARED values
+sum((x)^2 * p)
+x = c(1:6)     
+p = rep(1/6, 6) 
+
+# Population variance & standard deviation:  Var(X) = E[X^2] - E[X]^2 =====
+x <- c(0,1)       
+p <- c(1/2, 1/2)         
+EX  <- sum(x * p)     
+EX2 <- sum(x^2 * p)    
+VarX <- EX2 - EX^2     
+sdX  <- sqrt(VarX)
+
+# Population covariance:  Cov(X,Y) = E[XY] - E[X]*E[Y] 
+xj <- c(3,4,5)        # x across pairs (0,0) (0,1) (1,0) (1,1)
+yj <- c(4,2,2)        # y across those same pairs
+pj <- rep(1/3, 3)        # probability of each pair
+EXY <- sum(xj * yj *pj)    
+EX = sum(xj *pj)
+EY = sum(yj *pj)
+CovXY <- EXY - EX * EY  
+
+# Population correlation from a probability table
+xj <- c(0, 0, 1, 1)          
+yj <- c(0, 1, 0, 1)        
+pj <- c(0.4, 0.1, 0.1, 0.4) 
+EX  <- sum(xj * pj)                
+EY  <- sum(yj * pj)           
+EXY <- sum(xj * yj * pj)               
+Cov <- EXY - EX * EY               
+EX2 <- sum(xj^2 * pj)
+EY2 <- sum(yj^2 * pj)
+VarX <- EX2 - EX^2
+VarY <- EY2 - EY^2
+# sd of a 0/1 variable
+sdX <- sqrt(VarX)              
+sdY <- sqrt(VarY)               
+Cor <- Cov / (sdX * sdY)  
+
+# Conditional Expectation
+mean(wage1$wage[wage1$educ == 12])
+
+#### Properties of expectation:  
+# E[aX + b]
+answ <- a * EX + b
+a =
+EX =
+b = 
+  
+# E[aX + bY]
+Answ <- a * EX + b * EY
+a = 1
+EX = 1
+b = 2
+EY = 1
+
+# E[aX + bY - c]
+answ <- a * EX + b * EY - c
+a = 3
+EX = 7
+b = 5
+EY = 7
+c = 8
+
+# VarX with given values
+VarX <- EX2 - EX^2
+EX = 4
+EX2 = 52
+
+# Var(aX + b)
+answ <- a^2 * VarX
+a = 5
+VarX = 9
+
+# if X and Y independant, Var(X+Y) = VarX + VarY
+answ <- VarX + VarY
+VarX =
+VarY = 
+  
+# Var(aX + bY) 
+answ <- a^2 * VarX + b^2 * VarY + 2 * a * b * CovXY
+a = 
+b = 
+VarX = 
+VarY = 
+CovXY = 
+
+# Slope and intercept using sample data
+b1 <- cov(x, y) / var(x)        # slope    
+b0 <- mean(y) - b1 * mean(x)        # intercept  
