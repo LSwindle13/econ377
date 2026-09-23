@@ -52,13 +52,16 @@ VarX <- EX2 - EX^2
 sdX  <- sqrt(VarX)
 
 # Population covariance:  Cov(X,Y) = E[XY] - E[X]*E[Y] 
-xj <- c(3,4,5)        # x across pairs (0,0) (0,1) (1,0) (1,1)
-yj <- c(4,2,2)        # y across those same pairs
-pj <- rep(1/3, 3)        # probability of each pair
+x <- c(2,6,0)        # x across pairs (0,0) (0,1) (1,0) (1,1)
+y <- c(1,2,0)        # y across those same pairs
+p <- c(0.2,0.3,0.5)        # probability of each pair
 EXY <- sum(xj * yj *pj)    
 EX = sum(xj *pj)
 EY = sum(yj *pj)
 CovXY <- EXY - EX * EY  
+
+# Population B1 regression slope (Cov/VarX)
+CovXY / VarX
 
 # Population correlation from a probability table
 xj <- c(0, 0, 1, 1)          
@@ -128,3 +131,11 @@ CovXY =
 # Slope and intercept using sample data
 b1 <- cov(x, y) / var(x)        # slope    
 b0 <- mean(y) - b1 * mean(x)        # intercept  
+# Finding value of yhat at x = ? (plug in for last term)
+yhat = b0 + b1 * 7
+
+# Finding change in y using change in x and b1
+changey = b1 * (newx - oldx)
+b1 = 1/2
+newx = 12
+oldx = 6
