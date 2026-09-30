@@ -136,6 +136,46 @@ yhat = b0 + b1 * 7
 
 # Finding change in y using change in x and b1
 changey = b1 * (newx - oldx)
-b1 = 1/2
+b1 = 9 / 10
 newx = 12
 oldx = 6
+
+# Fit the regression:  wage on educ 
+reg <- lm(wage ~ educ, data = wage1)        # fit the OLS line
+reg$coefficients    
+b0 <- reg$coefficients[1]         # intercept
+b1 <- reg$coefficients[2]         # slope
+# Prediction 
+pred <-  b0 + b1 * -15
+# Predicted change
+pred2 <-  b1 * -5
+
+# Goodness of Fit (R^2)
+yhat <- reg$fitted.values      #(yhat = b0 + b1*educ)
+uhat <- reg$residuals       #(uhat = y - yhat)
+uhat <- y - yhat
+#SSR
+SSR  <- sum(uhat^2)    #or 
+SSR  <- (length(uhat) - 1) * var(uhat)
+#SSE
+SSE  <- (length(yhat) - 1) * var(yhat)
+# SST
+SST <- (length(y) - 1) * var(y)
+SST = SSE + SSR
+
+x = c(10,4,4)
+y = c(2,9,11)
+
+### R squared
+R2 <- SSE / SST # or
+R2 <- 1 - SSR / SST
+SSE = 123
+SST = 268
+SSR = 88
+Unexplainedfraction <- 1 - R2 
+SSR = SST * (1 - R2)
+
+# Finding residuals
+yhat <- 2 + (3 / 10) * x    # fitted line
+act_y <- 13
+uhat <- act_y - yhat     # residual
